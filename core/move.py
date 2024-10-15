@@ -1,5 +1,5 @@
 
-from board import load_fen
+from board import load_fen, debug
 
 
 def rook_moves(pos,board):
@@ -135,6 +135,9 @@ def bishop_moves(pos, board):
     
     return moves
 
+def queen_moves(pos,board):
+    moves = [*rook_moves(pos,board), *bishop_moves(pos,board)]
+    return moves
 
 board = load_fen("initial")
-print(rook_moves((4,1),board))
+debug(queen_moves((4,3),board))
