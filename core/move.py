@@ -181,6 +181,43 @@ def knight_moves(pos,board):
     
     return moves
 
+def pawn_moves(pos, board):
+    moves = []
+    color = board[pos[0]][pos[1]]
+
+    i,j = pos
+
+    if board[i][j].isupper():
+        if i >= 1:
+            if board[i-1][j] == "":
+                moves.append((i-1,j))
+                if i == 6:
+                    if board[i-2][j] == "":
+                        moves.append((i-2,j))
+
+            if j-1 >=0:
+                if board[i-1][j-1] != "" and board[i-1][j-1].isupper() != color.isupper():
+                    moves.append((i-1,j-1))
+            if j+1 < 8:
+                if board[i-1][j+1] != "" and board[i-1][j+1].isupper() != color.isupper():
+                    moves.append((i-1,j+1))
+
+    else:
+        if i <= 6:
+            if board[i+1][j] == "":
+                moves.append((i+1,j))
+                if i == 1:
+                    if board[i+2][j] == "":
+                        moves.append((i+2,j))
+
+            if j-1 >=0:
+                if board[i+1][j-1] != "" and board[i+1][j-1].isupper() != color.isupper():
+                    moves.append((i+1,j-1))
+            if j+1 < 8:
+                if board[i+1][j+1] != "" and board[i+1][j+1].isupper() != color.isupper():
+                    moves.append((i+1,j+1))
+
+    return moves
+
 board = load_fen("a")
-print((knight_moves((0,0),board)))
-debug(queen_moves((4,3),board))
+debug(pawn_moves((4,4),board))
